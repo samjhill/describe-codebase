@@ -38,7 +38,10 @@ def traverse_directory(directory):
 
             if ".venv" in file_path:
                 continue
-
+            
+            if ".json" in file_path:
+                continue
+            
             description = describe_file(file_path)
 
             # Save description to a file
