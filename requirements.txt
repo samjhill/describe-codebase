@@ -6,8 +6,8 @@ ConfigParser==6.0.0
 contextlib2==21.6.0
 cryptography==41.0.7
 curio==1.6
-Cython==3.0.6
 cython==3.0.6
+Cython==3.0.6
 disco==1.40.4
 dl==0.1.0
 docutils==0.20.1
@@ -29,7 +29,6 @@ Pillow==10.1.0
 protobuf==4.25.1
 pyOpenSSL==23.3.0
 pytest==7.4.3
-python-dotenv==1.0.0
 railroad==0.5.0
 redis==5.0.1
 setuptools_scm==8.0.4

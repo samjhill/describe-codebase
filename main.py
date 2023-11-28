@@ -1,4 +1,5 @@
 import os
+import sys
 
 from ai import describe_file_contents
 
@@ -34,6 +35,11 @@ def traverse_directory(directory):
                 desc_file.write(description)
 
 if __name__ == "__main__":
-    repository_path = "."
+    if len(sys.argv) > 1:
+        repository_path = sys.argv[1]
+    else:
+        repository_path = "."
 
+    print(f"Running on {repository_path}...")
+    
     traverse_directory(repository_path)
