@@ -1,0 +1,7 @@
+This is not a typical programming code file, rather it is a dependencies list file. The language it is being written in is most likely Python given the common python package names. This list contains names of Python packages and their versions needed to run a specific Python application. 
+
+In other words, it's a list of third-party libraries and scripts, used by the Python application. This kind of list ensures that the exact package versions are being used to avoid potential inconsistencies due to package updates.
+
+This dependencies list file does not contain methods as you would expect to find in a programming file.
+
+The packages listed suggest this Python application requires processing and manipulation of data (e.g., pandas, numpy), web toolkits (e.g., tornado), secure web communication (e.g., urllib3_secure_extra, pyOpenSSL), machine learning (tensorflow), visualization (e.g., matplotlib), credibility check (e.g., email_validator), image processing (e.g., Pillow) as well as other several utilities.

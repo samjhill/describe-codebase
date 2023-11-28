@@ -1,0 +1,28 @@
+1) Summary:
+This code serves as a text generation script using OpenAI's GPT-4 (Generative Pretrained Transformer). It takes in a prompt and content, generates text using the GPT-4 model, and then returns the generated text. Additionally, there's a function that reads content from a file, sends it to OpenAI's GPT-4, and gets a summarized description of the file's content.
+
+2) Individual methods:
+
+  * run_prompt(prompt, content, num_tokens=300)
+
+    Inputs: 
+      - prompt: Typically a question or statement to set the created text's topic or direction.
+      - content: Initial data that is fed to AI for processing.
+      - num_tokens: Optional, defaults to 300. Dictates the number of tokens (word chunks) the AI model should output.
+
+    Outputs:
+      - The response from the GPT-4 API, trimmed of any leading or trailing spaces.
+
+    Purpose:
+      - This function initializes the OpenAI API client with the user's API key, then uses the API to generate text based on the provided prompt and content. It then returns the first generated message received from the AI model.
+
+  * describe_file_contents(path)
+
+    Inputs:
+      - path: The location of a file.
+
+    Outputs:
+      - The response from the GPT-4 API after the file's content has been fed into the run_prompt function.
+
+    Purpose:
+      - This function opens and reads a

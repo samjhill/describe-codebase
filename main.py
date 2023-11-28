@@ -1,13 +1,11 @@
 import os
-from openai import OpenAIAPI # Assuming you have the OpenAI Python library installed
+
+from ai import describe_file_contents
+
+IGNORED_FILES = [".gitignore", "README.md", "requirements.txt"]
 
 def describe_file(file_path):
-    # Add your OpenAI API key here
-    openai_api = OpenAIAPI(api_key="YOUR_API_KEY")
-
-    # Use OpenAI API to describe the purpose of the file
-    # Replace this section with your specific use case for describing the file
-    description = openai_api.describe(file_path)
+    description = describe_file_contents(file_path)
 
     return description
 
@@ -24,6 +22,9 @@ def traverse_directory(directory):
         os.makedirs(description_folder, exist_ok=True)
 
         for file in files:
+            if file in IGNORED_FILES:
+                continue
+
             file_path = os.path.join(root, file)
             description = describe_file(file_path)
 
@@ -33,7 +34,6 @@ def traverse_directory(directory):
                 desc_file.write(description)
 
 if __name__ == "__main__":
-    # Replace with the path to your repository directory
-    repository_path = "/path/to/your/repository"
+    repository_path = "."
 
     traverse_directory(repository_path)
