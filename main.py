@@ -2,6 +2,7 @@ import os
 import sys
 
 from ai import describe_file_contents
+from extensions import code_file_extensions
 
 IGNORED_FILES = [".gitignore", "README.md", "requirements.txt"]
 
@@ -19,14 +20,25 @@ def traverse_directory(directory):
                 files = [f for f in files if f not in gitignore_content]
 
         # Create a folder for descriptions in each level
-        description_folder = os.path.join(root, 'descriptions')
+        description_folder = os.path.join(root, f"{root}-descriptions")
         os.makedirs(description_folder, exist_ok=True)
 
         for file in files:
             if file in IGNORED_FILES:
                 continue
-
+            
             file_path = os.path.join(root, file)
+            extension = os.path.splitext(file_path)[-1].lower()
+            
+            if extension not in code_file_extensions:
+                continue
+
+            if "descriptions" in file_path:
+                continue
+
+            if ".venv" in file_path:
+                continue
+
             description = describe_file(file_path)
 
             # Save description to a file

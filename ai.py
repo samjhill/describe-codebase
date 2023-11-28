@@ -27,9 +27,11 @@ def run_prompt(prompt, content, num_tokens=300):
 
 
 def describe_file_contents(path):
-    f = open(path, "r")
+    f = open(path, "rb")
+    contents = f.read()
+    print(f"running on {path}")
     return run_prompt(
         "The following is a piece of code. Please return the output as follows: 1) Summary <general summary of the file's overall function goes here> \n 2) Individual methods <list each method in the same order the file provides, with inputs, outputs, and purpose described> ",
-        f.read(),
+        contents,
     )
 

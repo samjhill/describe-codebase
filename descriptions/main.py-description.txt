@@ -1,9 +1,0 @@
-1) Summary
-This Python script traverses a directory and its content, while ignoring certain files specified in 'IGNORED_FILES', and writes descriptions for the files it processes into a newly created 'descriptions' folder in each directory level. It leverages an external function 'describe_file_contents' from an 'ai' module to generate descriptions for the files. Importantly, any file specified in a directory's '.gitignore' file will be excluded from processing as well.
-
-2) Individual Methods
-- describe_file(file_path): The function takes a file path as input and leverages an external 'describe_file_contents' function from an 'ai' module to determine information about the file, which it returns. The purpose of this function is to produce a description about the contents of a given file.
-
-- traverse_directory(directory): This function loops through a given directory and its subdirectories. For each file it encounters (that is not listed in the 'IGNORED_FILES' array or the '.gitignore' file), it uses the 'describe_file' function to generate a description, then saves that description in a new 'descriptions' folder in the corresponding directory. The inputs to this function are simply the main directory which the user wants to analyze whereas the output is the descriptions of the files in 'description' folder.
-
-- if __name__ == "__main__": This statement is used to allow or prevent parts of code from being run when the modules are imported. In this case, its purpose

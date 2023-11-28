@@ -1,0 +1,22 @@
+1) Summary
+This Python script uses the OpenAI API to analyze the contents of a file and provide a summary and description of its contents. It primarily uses the chat.completions.create component of the OpenAI GPT-4 model for analysis. 
+
+2) Individual Methods 
+
+a) run_prompt(prompt, content, num_tokens=300):
+Inputs:
+- `prompt`: a string, the GPT-4 model takes this as the initial input to generate a response.
+- `content`: a string, this is appended to the `prompt` to construct the full input for the GPT-4 model.
+- `num_tokens`: an integer specifying maximum length of the output from GPT-4 model, default value is 300.
+Outputs:
+- Returns a string which is response generated from the GPT-4 model.
+Purpose:
+- This function triggers the GPT-4 model to generate a response based on the given `prompt` concatenated with the `content`. 
+
+b) describe_file_contents(path):
+Inputs:
+- `path`: a string, represents the input file path.
+Outputs:
+- Prints the running statement and returns the model response in string format.
+Purpose:
+- This function opens a file, reads its contents, and passes those contents to a function `run_prompt` which generates a descriptive summary of the file's content using the GPT-4 model.

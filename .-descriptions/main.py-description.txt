@@ -1,0 +1,16 @@
+Summary:
+This script is designed to recursively navigate through a target directory tree, specifically ignoring files specified within a .gitignore file or from a specific IGNORED_FILES list. It primarily searches for code files, such as Python or JavaScript, by checking the file extensions. They are then passed through an artificially intelligent `describe_file_contents` function, present within module 'ai', which generates description of the file contents. The produced descriptions are then stored in a separate folder within each directory level. If run as a standalone script, it takes the directory path as an argument and prints the directory it is running on.
+
+Individual Methods: 
+
+1) **describe_file(file_path)**  
+    - Input: a pathway to a file.
+    - Output: a description of the contents of the provided file.
+    - Purpose: used to generate a description of the file contents using the `describe_file_contents` function from the 'ai' module.
+            
+2) **traverse_directory(directory)**  
+    - Input: a pathway to a directory.
+    - Output: none explicitly, other than potentially writing file descriptions to disk.
+    - Purpose: this function is used to traverse the directory recursively, ignore files specified in '.gitignore' and files in 'IGNORED_FILES', identify code files by checking extensions and then describe these files using 'describe_file' function. The descriptions are then written to a generated "description" folder within each directory level.
+    
+3) **if __name__ == "__main__":
