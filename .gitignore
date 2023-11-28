@@ -1,0 +1,13 @@
+# Python specific
+*.pyc
+*.pyo
+__pycache__
+
+# Jupyter Notebook specific
+.ipynb_checkpoints
+
+# Virtual environment
+venv/
+env/
+.venv
+.env
