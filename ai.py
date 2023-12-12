@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def run_prompt(prompt, content, num_tokens=300):
+def run_prompt(prompt, content, num_tokens=1000):
     # Set your OpenAI API key
     api_key = os.environ.get("OPENAI_API_KEY")
 
@@ -18,7 +18,7 @@ def run_prompt(prompt, content, num_tokens=300):
 
     # Call the OpenAI GPT-3 API for analysis
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4-1106-preview",
         max_tokens=num_tokens,  # Adjust as needed
         messages=[{"role": "user", "content": prompt}],
     )
