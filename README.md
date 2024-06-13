@@ -1,6 +1,6 @@
-# describe-codebase
+# test-codebase
 
-Recursively traverses a codebase and analyzes each file using GPT-4. It creates a description file for each code file, explaining it at a high level, then breaking down each method individually for inputs, outputs, and functionality.
+Recursively traverses a codebase and analyzes each file using GPT-4. It creates a test file for each code file.
 
 
 ## Setup
@@ -23,5 +23,5 @@ pip install
 ## Usage
 
 ```shell
-python3 -m main
+python3 -m main <path_to_folder>
 ```

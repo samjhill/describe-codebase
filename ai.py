@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def run_prompt(prompt, content, num_tokens=300):
+def run_prompt(prompt, content, num_tokens=1250):
     # Set your OpenAI API key
     api_key = os.environ.get("OPENAI_API_KEY")
 
@@ -16,9 +16,8 @@ def run_prompt(prompt, content, num_tokens=300):
 
     prompt = f"{prompt} {content}"
 
-    # Call the OpenAI GPT-3 API for analysis
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4-turbo",
         max_tokens=num_tokens,  # Adjust as needed
         messages=[{"role": "user", "content": prompt}],
     )
@@ -31,7 +30,7 @@ def describe_file_contents(path):
     contents = f.read()
     print(f"running on {path}")
     return run_prompt(
-        "The following is a piece of code. Please return the output as follows: 1) Summary <general summary of the file's overall function goes here> \n 2) Individual methods <list each method in the same order the file provides, with inputs, outputs, and purpose described> ",
+        "The following is a piece of code. Please act as an expert programmer and write Jest unit tests for each function in the file. Only return the raw code of the tests; do not add any commentary before or after. Do not wrap the response in backticks (`). If there are no functions to test, simply return an empty string.",
         contents,
     )
 

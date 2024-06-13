@@ -8,8 +8,6 @@ code_file_extensions = [
     ".rb",                # Ruby
     ".js",                # JavaScript
     ".ts",                # TypeScript
-    ".html", ".htm",      # HTML
-    ".css",               # CSS
     ".swift",             # Swift
     ".go",                # Go
     ".lua",               # Lua

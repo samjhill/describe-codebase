@@ -19,8 +19,7 @@ def traverse_directory(directory):
                 gitignore_content = gitignore_file.read().split('\n')
                 files = [f for f in files if f not in gitignore_content]
 
-        # Create a folder for descriptions in each level
-        description_folder = os.path.join(root, f"{root}-descriptions")
+        description_folder = os.path.join(root, f"{root}-tests")
         os.makedirs(description_folder, exist_ok=True)
 
         for file in files:
@@ -33,7 +32,7 @@ def traverse_directory(directory):
             if extension not in code_file_extensions:
                 continue
 
-            if "descriptions" in file_path:
+            if "tests" in file_path:
                 continue
 
             if ".venv" in file_path:
@@ -41,12 +40,29 @@ def traverse_directory(directory):
             
             if ".json" in file_path:
                 continue
+
+            if "mocks" in file_path:
+                continue
             
+            if "types" in file_path:
+                continue
+
             description = describe_file(file_path)
 
             # Save description to a file
-            description_file = os.path.join(description_folder, f'{file}-description.txt')
+            description_file = os.path.join(f"{directory}/tests", f'{file.split(".")[0]}.test.jss')
+            
+            # Check if the test file already exists, and if so, skip it
+            if os.path.exists(description_file):
+                print(f"Skipping {description_file} as it already exists.")
+                continue
+
+            if not description or len(description) < 150:
+                print("not writing this to file")
+                continue
+
             with open(description_file, 'w') as desc_file:
+                print(description)
                 desc_file.write(description)
 
 if __name__ == "__main__":
