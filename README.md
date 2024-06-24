@@ -1,6 +1,6 @@
 # test-codebase
 
-Recursively traverses a codebase and analyzes each file using GPT-4. It creates a test file for each code file.
+Recursively traverses a codebase creates unit tests for each code file.
 
 
 ## Setup
@@ -17,11 +17,11 @@ OPENAI_API_KEY="...."
 ```shell
 python3 -m venv .venv
 source .venv/bin/activate
-pip install
+pip install -r requirements.txt
 ```
 
 ## Usage
 
 ```shell
-python3 -m main <path_to_folder>
+python -m src.main <path_to_folder>
 ```

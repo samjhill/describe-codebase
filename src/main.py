@@ -1,8 +1,8 @@
 import os
 import sys
 
-from ai import describe_file_contents
-from extensions import code_file_extensions
+from src.ai import describe_file_contents
+from src.extensions import code_file_extensions
 
 IGNORED_FILES = [".gitignore", "README.md", "requirements.txt"]
 
@@ -11,17 +11,14 @@ def describe_file(file_path):
 
     return description
 
-def traverse_directory(directory):
+def traverse_directory(directory, language="python"):
     for root, dirs, files in os.walk(directory):
         # Ignore files specified in .gitignore
         if '.gitignore' in files:
             with open(os.path.join(root, '.gitignore'), 'r') as gitignore_file:
                 gitignore_content = gitignore_file.read().split('\n')
                 files = [f for f in files if f not in gitignore_content]
-
-        description_folder = os.path.join(root, f"{root}-tests")
-        os.makedirs(description_folder, exist_ok=True)
-
+        
         for file in files:
             if file in IGNORED_FILES:
                 continue
@@ -47,23 +44,35 @@ def traverse_directory(directory):
             if "types" in file_path:
                 continue
 
-            description = describe_file(file_path)
+            save_directory = f"{directory}/tests"
 
-            # Save description to a file
-            description_file = os.path.join(f"{directory}/tests", f'{file.split(".")[0]}.test.jss')
+            if language == "python":
+                description_file = os.path.join(save_directory, f'test_{file.split(".")[0]}.py')
             
+            if language == "js" or language == "ts":
+                description_file = os.path.join(save_directory, f'{file.split(".")[0]}.test.js')
+
             # Check if the test file already exists, and if so, skip it
             if os.path.exists(description_file):
                 print(f"Skipping {description_file} as it already exists.")
                 continue
+            
+            description = describe_file(file_path)
 
             if not description or len(description) < 150:
                 print("not writing this to file")
                 continue
+            
+            os.path(save_directory).mkdir(parents=True, exist_ok=True)
 
             with open(description_file, 'w') as desc_file:
                 print(description)
                 desc_file.write(description)
+            
+            # python: create init file
+            if language == "python":
+                with open(f"{save_directory}/__init__.py", 'w') as init_file:
+                    init_file.write("")
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

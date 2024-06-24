@@ -3,6 +3,7 @@
 *.pyo
 __pycache__
 ./__pycache__/
+.pytest_cache
 
 # Jupyter Notebook specific
 .ipynb_checkpoints
