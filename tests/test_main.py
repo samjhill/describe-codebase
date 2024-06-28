@@ -44,7 +44,7 @@ def mock_describe_file(fun):
 def setup_directory_and_files():
     with patch('os.walk') as mock_walk, \
          patch('os.path.exists') as mock_exists, \
-         patch('src.main.describe_file') as mock_describe:
+         patch('src.main.describe_file_contents') as mock_describe:
         mock_walk.return_value = mock_os_walk
         mock_exists.side_effect = mock_not_exists
         mock_describe.side_effect = describe_file_contents

@@ -6,11 +6,6 @@ from src.extensions import code_file_extensions
 
 IGNORED_FILES = [".gitignore", "README.md", "requirements.txt"]
 
-def describe_file(file_path):
-    description = describe_file_contents(file_path)
-
-    return description
-
 def traverse_directory(directory, language="python"):
     for root, dirs, files in os.walk(directory):
         # Ignore files specified in .gitignore
@@ -44,6 +39,9 @@ def traverse_directory(directory, language="python"):
             if "types" in file_path:
                 continue
 
+            if "libraries" in file_path:
+                continue
+
             save_directory = f"{directory}/tests"
 
             if language == "python":
@@ -57,13 +55,13 @@ def traverse_directory(directory, language="python"):
                 print(f"Skipping {description_file} as it already exists.")
                 continue
             
-            description = describe_file(file_path)
+            description = describe_file_contents(file_path, directory)
 
             if not description or len(description) < 150:
                 print("not writing this to file")
                 continue
             
-            os.path(save_directory).mkdir(parents=True, exist_ok=True)
+            os.makedirs(save_directory, exist_ok=True)
 
             with open(description_file, 'w') as desc_file:
                 print(description)
