@@ -1,6 +1,6 @@
 # test-codebase
 
-Recursively traverses a codebase creates unit tests for each code file.
+Recursively traverses a codebase creates unit tests for each code file. After you have solid tests in place, you can use this same script to go through and improve your code, and test the improved code against it.
 
 
 ## Setup
@@ -22,6 +22,14 @@ pip install -r requirements.txt
 
 ## Usage
 
+### Create tests
+
 ```shell
-python -m src.main <path_to_folder>
+python -m src.main <path_to_folder> <language: "python" or "javascript">
+```
+
+### Improve code
+
+```
+python -m src.main <path_to_folder> <language: "python" or "javascript"> True
 ```

@@ -51,7 +51,7 @@ def split_methods(file_path):
     
     return methods
 
-def describe_file_contents(file_path, parent_directory, language="python"):
+def describe_file_contents(file_path, parent_directory, improve_code=False, language="python"):
     test_type = "pytest" if language == "python" else "Jest"
     print(f"running on {file_path}")
 
@@ -61,8 +61,12 @@ def describe_file_contents(file_path, parent_directory, language="python"):
 
     test_results = []
     
+    test_prompt = f"The following is a piece of code. Please act as an expert programmer and write {test_type} unit tests for it. Whenever you need to patch a custom module, use the path to the module: {relative_path}. Ensure there are no misspellings. Ensure that all the methods you call actually exist. Do not include import statements. Only return the raw code of the tests; do not add any commentary before or after. Do not wrap the response in backticks (`). If there are no functions to test, simply return an empty string."
+    
+    improve_code_prompt = f"The following is a piece of code. Please act as an expert programmer and improve the code, making it more readable. Ensure there are no misspellings. Ensure that all the methods you call actually exist. Do not include import statements. Only return the raw code; do not add any commentary before or after. Do not wrap the response in backticks (`). If there are no functions to test, simply return an empty string."
+
     for method in methods:
-        result = run_prompt(f"The following is a piece of code. Please act as an expert programmer and write {test_type} unit tests for it. Whenever you need to patch a custom module, use the path to the module: {relative_path}. Ensure there are no misspellings. Ensure that all the methods you call actually exist. Do not include import statements. Only return the raw code of the tests; do not add any commentary before or after. Do not wrap the response in backticks (`). If there are no functions to test, simply return an empty string.",
+        result = run_prompt(improve_code_prompt if improve_code else test_prompt,
             method,
         )
         print(result)
