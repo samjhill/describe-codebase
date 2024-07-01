@@ -25,11 +25,11 @@ pip install -r requirements.txt
 ### Create tests
 
 ```shell
-python -m src.main <path_to_folder> <language: "python" or "javascript">
+python -m src.main <path_to_folder>
 ```
 
 ### Improve code
 
 ```
-python -m src.main <path_to_folder> <language: "python" or "javascript"> True
+python -m src.main <path_to_folder> True
 ```

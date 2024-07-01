@@ -6,7 +6,7 @@ from src.extensions import code_file_extensions
 
 IGNORED_FILES = [".gitignore", "README.md", "requirements.txt"]
 
-def traverse_directory(directory, language="python", improve_code=False):
+def traverse_directory(directory, improve_code=False):
     for root, dirs, files in os.walk(directory):
         # Ignore files specified in .gitignore
         if '.gitignore' in files:
@@ -44,6 +44,8 @@ def traverse_directory(directory, language="python", improve_code=False):
 
             save_directory = f"{directory}/tests"
 
+            language = "python" if ".py" in file else "js"
+
             if language == "python":
                 description_file = os.path.join(save_directory, f'test_{file.split(".")[0]}.py')
             
@@ -79,27 +81,24 @@ if __name__ == "__main__":
         repository_path = "."
 
     if len(sys.argv) > 2:
-        language = sys.argv[2]
-    else:
-        language = "python"
-
-    if len(sys.argv) > 3:
-        improve_code = sys.argv[3]
+        improve_code = sys.argv[2]
     else:
         improve_code = False
 
     print(f"Running on {repository_path}...")
-    print(f"Language: {language}")
     print(f"Improve code: {improve_code}")
 
     is_directory = os.path.isdir(repository_path)
 
     if (is_directory):
-        traverse_directory(repository_path, language, improve_code)
+        traverse_directory(repository_path, improve_code)
     
     else:
-        description = describe_file_contents(repository_path, repository_path, improve_code)
+        # it's only one file
+        file_name = repository_path
+        language = "python" if ".py" in file_name else "js"
+        description = describe_file_contents(file_name, file_name, improve_code)
 
-        with open(repository_path, 'w') as desc_file:
+        with open(file_name, 'w') as desc_file:
             print(description)
             desc_file.write(description)
